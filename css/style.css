@@ -1,0 +1,19 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+h1 {
+  text-align: center;
+  padding: 20px;
+}
+
+#chart {
+  margin: 20px auto;
+  max-width: 800px;
+  border: 1px solid #ddd;
+  background: #fff;
+}

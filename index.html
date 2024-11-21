@@ -79,7 +79,30 @@
     #select-all:hover,
     #deselect-all:hover {
       background-color: #1976D2;
+  <title>Data Visualization</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <style>
+    /* Add CSS directly here or in your external style.css */
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
     }
+    .sidebar {
+      width: 250px;
+      background-color: #f4f4f4;
+      padding: 20px;
+      box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    }
+    .content {
+      flex: 1;
+      padding: 20px;
+    }
+    #chart {
+      width: 100%;
+      height: 600px;
+    }}
   </style>
 </head>
 
@@ -98,6 +121,101 @@
 
 <button id="select-all">Select All</button>
 <button id="deselect-all">Deselect All</button>
+<div class="sidebar">
+  <h2>Famine Clock</h2>
+  <p>Time left until the next famine crisis:</p>
+  <p id="famine-countdown" style="font-size: 1.5em; font-weight: bold; color: red;"></p>
+  <script>
+    // Famine Clock Countdown Logic
+    function updateCountdown() {
+      // Set the target date for the next famine (example: Jan 1, 2025)
+      const targetDate = new Date("2025-01-01T00:00:00").getTime();
+      const now = new Date().getTime();
+
+      // Calculate the remaining time
+      const timeLeft = targetDate - now;
+
+      if (timeLeft > 0) {
+        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+
+        // Display the countdown in the sidebar
+        document.getElementById("famine-countdown").textContent =
+          `${days}d ${hours}h ${minutes}m ${seconds}s`;
+      } else {
+        // If the countdown is complete
+        document.getElementById("famine-countdown").textContent = "The famine crisis has started.";
+      }
+    }
+
+    // Update the countdown every second
+    setInterval(updateCountdown, 1000);
+    updateCountdown(); // Initial call to avoid delay
+  </script>
+</div>
+<div class="content">
+  <h1>Climate Change: Crops Impact on Economy</h1>
+  <p class="description">
+    Our project focuses on the profound impact of climate change on crop production, which directly influences the agricultural
+    industry and the broader economy of the United States. In recent years, rising global temperatures have disrupted traditional
+    farming cycles, leading to unpredictable yields and a decrease in the production of key crops such as wheat, corn, and soybeans.
+    Prolonged droughts, more frequent heatwaves, and erratic rainfall patterns have made farming more challenging, reducing both
+    the quantity and quality of crops grown.
+  </p>
+
+  <p class="description">
+    This decline in crop production not only threatens food security but also drives up the cost of basic agricultural products.
+    For the younger generation, this means an increased cost of living as staples like bread, cereals, and fresh produce become
+    less affordable. The rising cost of food disproportionately impacts low-income families, widening the economic divide and posing
+    long-term challenges to health and well-being.
+  </p>
+
+  <p class="description">
+    As climate change accelerates, the younger generation is also inheriting a farming industry that faces unprecedented risks and
+    uncertainties. Reduced crop yields mean smaller profits for farmers, leading to higher prices throughout the supply chain.
+    This economic pressure may discourage future investment in agriculture, further exacerbating food shortages and economic instability.
+    Through this project, we aim to highlight the urgency of adopting sustainable agricultural practices and climate adaptation strategies.
+    By analyzing trends in crop production and their economic impact, we hope to foster awareness and inspire solutions that can safeguard
+    the future of food security for generations to come.
+  </p>
+  <div id="chart"></div>
+  <div id="us-crop-map" style="width: 100%; height: 600px; margin-top: 20px;"></div>
+</div>
+
+<script>
+  // Data for the United States crop map
+  const cropData = {
+    type: 'choropleth',
+    locationmode: 'USA-states',
+    locations: ['IA', 'IL', 'NE', 'MN', 'KS', 'IN', 'TX', 'SD', 'MO', 'WI'], // States where crops are grown
+    z: [8.1, 7.5, 6.8, 6.4, 6.0, 5.8, 5.5, 5.3, 5.1, 4.9], // Example crop intensity (replace with actual data)
+    text: ['Iowa', 'Illinois', 'Nebraska', 'Minnesota', 'Kansas', 'Indiana', 'Texas', 'South Dakota', 'Missouri', 'Wisconsin'],
+    colorscale: 'Greens', // Use green for agricultural areas
+    colorbar: {
+      title: 'Crop Intensity'
+    },
+    marker: {
+      line: {
+        color: 'rgb(255,255,255)',
+        width: 2
+      }
+    }
+  };
+
+  const layout = {
+    title: 'US Crop Production by State',
+    geo: {
+      scope: 'usa',
+      showlakes: true,
+      lakecolor: 'rgb(255,255,255)'
+    }
+  };
+
+  // Render the map in the specified div
+  Plotly.newPlot('us-crop-map', [cropData], layout);
+</script>
 
 <script src="js/script.js"></script>
 </body>

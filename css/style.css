@@ -53,4 +53,30 @@ button:hover {
 /* Additional styling for hover effects */
 button:focus {
   outline: none;
+body {
+  display: flex;
+  flex-direction: row-reverse; /* Sidebar on the right */
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
+.sidebar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 20px;
+  box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); /* Shadow adjusted for the right */
+}
+.content {
+  flex: 1;
+  padding: 20px;
+}
+#chart {
+  width: 100%;
+  height: 600px;
+}
+.description {
+  font-size: 1.1em;
+  color: #555;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}}

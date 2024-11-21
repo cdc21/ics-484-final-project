@@ -1,19 +1,56 @@
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  background-color: #f4f4f9;
-  color: #333;
-}
-
-h1 {
-  text-align: center;
+/* Main container for layout */
+#container {
+  display: flex;               /* Flexbox layout to display side by side */
+  justify-content: space-between;  /* Space out the elements */
   padding: 20px;
 }
 
-#chart {
-  margin: 20px auto;
-  max-width: 800px;
-  border: 1px solid #ddd;
-  background: #fff;
+/* Styling for the graph container */
+#graph-container {
+  width: 75%;  /* Take up 75% of the screen width */
+}
+
+/* Styling for the attribute filter container */
+#attribute-filter-container {
+  width: 20%;  /* Take up 20% of the screen width */
+  padding-left: 20px;
+}
+
+/* Filter controls */
+#filter-controls {
+  border: 1px solid #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+}
+
+h3 {
+  text-align: center;
+}
+
+button {
+  margin: 5px;
+  padding: 8px 15px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+.checkbox-container {
+  margin-bottom: 10px;
+}
+
+.checkbox-container input {
+  margin-right: 10px;
+}
+
+/* Additional styling for hover effects */
+button:focus {
+  outline: none;
 }

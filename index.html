@@ -122,28 +122,29 @@
 <button id="select-all">Select All</button>
 <button id="deselect-all">Deselect All</button>
 <div class="sidebar">
-  <h2>Famine Clock</h2>
-  <p>Time left until the next famine crisis:</p>
+  <h2>Climate Clock</h2>
+  <p>Time Left To Limit Global Warming To 1.5C:</p>
   <p id="famine-countdown" style="font-size: 1.5em; font-weight: bold; color: red;"></p>
   <script>
     // Famine Clock Countdown Logic
     function updateCountdown() {
       // Set the target date for the next famine (example: Jan 1, 2025)
-      const targetDate = new Date("2025-01-01T00:00:00").getTime();
+      const targetDate = new Date("2029-07-21T00:00:00").getTime();
       const now = new Date().getTime();
 
       // Calculate the remaining time
       const timeLeft = targetDate - now;
 
       if (timeLeft > 0) {
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+        const years = Math.floor(timeLeft / (1000 * 60 * 60 * 24 * 365)); // Calculate full years
+        const days = Math.floor((timeLeft % (1000 * 60 * 60 * 24 * 365)) / (1000 * 60 * 60 * 24)); // Remaining days
+        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)); // Remaining hours
+        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60)); // Remaining minutes
+        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000); // Remaining seconds
 
         // Display the countdown in the sidebar
         document.getElementById("famine-countdown").textContent =
-          `${days}d ${hours}h ${minutes}m ${seconds}s`;
+          `${years}YRS ${days}DAYS ${hours}:${minutes}:${seconds}`;
       } else {
         // If the countdown is complete
         document.getElementById("famine-countdown").textContent = "The famine crisis has started.";

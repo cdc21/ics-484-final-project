@@ -7,7 +7,6 @@
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
   <style>
-    /* Add CSS directly here or in your external style.css */
     body {
       display: flex;
       margin: 0;
@@ -23,46 +22,21 @@
       flex: 1;
       padding: 20px;
     }
-    #chart {
+    #chart, #us-crop-map, #line-graph {
       width: 100%;
       height: 600px;
+      margin-top: 10px;
     }
   </style>
 </head>
 <body>
 <div class="sidebar">
-  <h2>Famine Clock</h2>
-  <p>Time left until the next famine crisis:</p>
+  <h1>Famine Clock</h1>
   <p id="famine-countdown" style="font-size: 1.5em; font-weight: bold; color: red;"></p>
-  <script>
-    // Famine Clock Countdown Logic
-    function updateCountdown() {
-      // Set the target date for the next famine (example: Jan 1, 2025)
-      const targetDate = new Date("2025-01-01T00:00:00").getTime();
-      const now = new Date().getTime();
-
-      // Calculate the remaining time
-      const timeLeft = targetDate - now;
-
-      if (timeLeft > 0) {
-        const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-
-        // Display the countdown in the sidebar
-        document.getElementById("famine-countdown").textContent =
-          `${days}d ${hours}h ${minutes}m ${seconds}s`;
-      } else {
-        // If the countdown is complete
-        document.getElementById("famine-countdown").textContent = "The famine crisis has started.";
-      }
-    }
-
-    // Update the countdown every second
-    setInterval(updateCountdown, 1000);
-    updateCountdown(); // Initial call to avoid delay
-  </script>
+  <p>Time left until the next famine crisis:</p>
+  <h1>Time to Change</h1>
+  <p></p>
+  <h1>Reference</h1>
 </div>
 <div class="content">
   <h1>Climate Change: Crops Impact on Economy</h1>
@@ -89,43 +63,22 @@
     By analyzing trends in crop production and their economic impact, we hope to foster awareness and inspire solutions that can safeguard
     the future of food security for generations to come.
   </p>
-  <div id="chart"></div>
-  <div id="us-crop-map" style="width: 100%; height: 600px; margin-top: 20px;"></div>
+
+ <h2>Taking a Look into the Patterns</h2>
+  <div id="us-crop-map"></div>
+  <p class="description">
+    This map shows the the areas where majority of the US agirculture states. We see 9 states that produces crops with different ranges.
+    The color intesity shows how much is that state crop production is in factors.
+  </p>
+
+  <div id="line-graph"></div>
+  <p class="description">
+    This graphs is showing us the graph of CO2 Emission is being produced each year just by focusing on the United States alone.
+    We see a major incline in the 1900s to present date indicating there have been increasing growth the temperature in the United States.
+  </p>
+
+  <div id="ppi-bar-chart" style="width: 100%; height: 600px;"></div>
 </div>
-
-<script>
-  // Data for the United States crop map
-  const cropData = {
-    type: 'choropleth',
-    locationmode: 'USA-states',
-    locations: ['IA', 'IL', 'NE', 'MN', 'KS', 'IN', 'TX', 'SD', 'MO', 'WI'], // States where crops are grown
-    z: [8.1, 7.5, 6.8, 6.4, 6.0, 5.8, 5.5, 5.3, 5.1, 4.9], // Example crop intensity (replace with actual data)
-    text: ['Iowa', 'Illinois', 'Nebraska', 'Minnesota', 'Kansas', 'Indiana', 'Texas', 'South Dakota', 'Missouri', 'Wisconsin'],
-    colorscale: 'Greens', // Use green for agricultural areas
-    colorbar: {
-      title: 'Crop Intensity'
-    },
-    marker: {
-      line: {
-        color: 'rgb(255,255,255)',
-        width: 2
-      }
-    }
-  };
-
-  const layout = {
-    title: 'US Crop Production by State',
-    geo: {
-      scope: 'usa',
-      showlakes: true,
-      lakecolor: 'rgb(255,255,255)'
-    }
-  };
-
-  // Render the map in the specified div
-  Plotly.newPlot('us-crop-map', [cropData], layout);
-</script>
-
 <script src="js/script.js"></script>
 </body>
 </html>
